@@ -1,69 +1,102 @@
 import React from "react";
-import { Button, View, Text, FlatList } from "react-native";
+import { Button, View, Text, FlatList, StyleSheet, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 import { fetchBooks } from "../app/actions/bookActions";
 import { bindActionCreators } from "redux";
+import SearchForm from "../app/components/search-form/search-form";
 
-const onSetTests = payload => {
-  return {
-    type: "SET_TEST",
-    payload
+
+export class MyListItem extends React.PureComponent {
+  onPress = () => {
+    this.props.onPressItem(this.props.id);
   };
-};
 
+  render() {
+    const {item} = this.props;
+    return (
+      <TouchableOpacity onPress={this.onPress}>
+        <View>
+          <Text style={styles.listItem}>
+          {this.props.title}
+          </Text>
+        </View>
+      </TouchableOpacity>
+    );
+  }
+}
 export class SearchResultsScreen extends React.Component {
   constructor(props) {
     super(props);
 
-    this.test = this.test.bind(this);
+    this.fetchBooks = this.fetchBooks.bind(this);
+    this.keyExtractor = this.keyExtractor.bind(this);
+    this.onPressItem = this.onPressItem.bind(this);
   }
   componentDidMount() {
     const { navigation } = this.props;
     const query = navigation.getParam("query", "NO-ID");
+    this.fetchBooks(query);
   }
 
-  fetchBooks(x) {
-    this.props.actions.fetchBooks("lord");
+  fetchBooks(query) {
+    this.props.actions.fetchBooks(query);
   }
 
-  keyExtractor = (item, index) => item.id;
+  keyExtractor(item, index) {
+    return item.id;
+  }
+
+  onPressItem (id)  {
+   this.props.navigation.navigate('BookDetails', {id});
+  };
 
   renderItem = ({ item }) => (
-    <View
+    <MyListItem
       id={item.id}
       onPressItem={this.onPressItem}
       // selected={!!this.state.selected.get(item.id)}
-      // title={item.title}
-    >
-      item
-    </View>
+      title={item.volumeInfo.title}
+    />
   );
 
   render() {
-    console.log(this.props, "render");
+    const { isFetching, results } = this.props.books;
+    console.log(this.props.books, "props");
 
-    return (
+    return isFetching || !results ? (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text>Search Results Screen</Text>
-        <Button
-          title="Go to details"
-          onPress={() => this.props.navigation.push("BookDetails")}
-        />
-        <Button
-          title="Go to Home"
-          onPress={() => this.props.navigation.navigate("Home")}
-        />
-        <Button title="set test" onPress={() => this.test("sasax")} />
-        {/* <FlatList
-                  data={this.props.results.items}
-                  extraData={this.state}
-                  keyExtractor={this.keyExtractor}
-                  renderItem={this .renderItem}
-         /> */}
+        <Text> Loading </Text>
       </View>
+    ) : (
+      <View style={{ flex: 1, justifyContent: "center" }}>
+        <Text>Search Results Screen</Text>
+        <View style={{ flex: 1, flexDirection: 'row' }}>
+          <Button
+            title="Go to Home"
+            onPress={() => this.props.navigation.navigate("Home")}
+          />
+        </View>
+        <SearchForm onSubmit={values => this.fetchBooks(values.search)} />
+        <FlatList
+          data={this.props.books.results.items}
+          // extraData={this.state}
+        
+          keyExtractor={this.keyExtractor}
+          renderItem={this.renderItem}
+        />
+      </View>
+      
     );
   }
 }
+
+const styles = StyleSheet.create({
+  listItem: {
+    padding: 10,
+    fontWeight: "bold",
+    fontSize: 20
+  }
+});
 
 const mapStateToProps = state => {
   return { books: state.books };

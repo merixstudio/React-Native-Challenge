@@ -15,10 +15,9 @@ const renderInput = ({ input: { onChange, ...restInput } }) => {
   ); 
 };
 
-const SearchForm = ({ onSubmit, handleChange, handleSubmit, value }) => {
+const SearchForm = ({ onSubmit, handleSubmit, value }) => {
   return (
     <View style={styles.container}>
-      <Text>Search:</Text>
       <Field name="search" 
              component={renderInput} 
              value={value}
@@ -39,14 +38,14 @@ const styles = StyleSheet.create({
     lineHeight: 30,
     marginTop: 10,
     textAlign: "center",
-    width: 250
+    minWidth: 250
   },
   container: {},
   input: {
     borderColor: "black",
     borderWidth: 1,
     height: 37,
-    width: 250
+    minWidth: 250,
   }
 });
 

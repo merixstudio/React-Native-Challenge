@@ -6,27 +6,33 @@ const INITIAL_STATE = {
   results: null,
   errors: [],
   isFetching: false,
-  test: null,
 };
 
-export const bookReducer = (state = INITIAL_STATE, action) => {
-  switch (action.type) {
+export const bookReducer = (state = INITIAL_STATE, {type, payload}) => {
+  switch (type) {
     case booksActionsTypes.SEARCH_REQUEST: {
       return {
         ...state,
         isFetching: true
       };
     }
-    case 'SET_TEST': {
-      return {
-        ...state,
-        test: action.payload,
-      };
-    }
     case booksActionsTypes.SEARCH_SUCCESS: {
       return {
         ...state,
-        results: action.payload,
+        results: payload,
+        isFetching: false
+      };
+    }
+    case booksActionsTypes.BOOK_DETAILS_REQUEST: {
+      return {
+        ...state,
+       isFetching: true
+      };
+    }
+    case booksActionsTypes.BOOK_DETAILS_SUCCESS: {
+      return {
+        ...state,
+        current: payload,
         isFetching: false
       };
     }

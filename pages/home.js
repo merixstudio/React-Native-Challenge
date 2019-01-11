@@ -2,7 +2,7 @@ import React from "react";
 import { Button, View, Text } from "react-native";
 import { connect } from "react-redux";
 import SearchForm from "../app/components/search-form/search-form";
-import { booksActionsTypes } from '../app/actions/bookActions';
+
 
 export class HomeScreen extends React.Component {
   
@@ -19,15 +19,7 @@ export class HomeScreen extends React.Component {
   render() {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text>Home Screen</Text>
-        <Button
-          title="Go to Details"
-          onPress={() => this.props.navigation.push("BookDetails")}
-        />
-        <Button
-          title="Go to results"
-          onPress={() => this.props.navigation.push("SearchResults")}
-        /> 
+        <Text>Search for book</Text>
         <SearchForm onSubmit={values => this.handleSearchSubmit(values.search)} />
       </View>
     );
