@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Button, View, Text } from 'react-native';
+import { connect } from 'react-redux';
 
 export class BookDetailsScreen extends React.Component {
     render() {
@@ -19,3 +20,10 @@ export class BookDetailsScreen extends React.Component {
       );
     }
 }
+
+const mapStateToProps = (state) => {
+  const { book } = state
+  return { book }
+};
+
+export default connect(mapStateToProps)(BookDetailsScreen);
