@@ -1,37 +1,35 @@
-import React from "react";
-import { createAppContainer, createStackNavigator } from "react-navigation";
-import HomeScreen from "./pages/home";
-import BookDetailsScreen from "./pages/book-details";
-import SearchResultsScreen from "./pages/search-results";
-import { Provider } from "react-redux";
+import React from 'react';
+import { Provider } from 'react-redux';
+import { createAppContainer, createStackNavigator } from 'react-navigation';
+import HomeScreen from './pages/home';
+import BookDetailsScreen from './pages/bookDetails';
+import SearchResultsScreen from './pages/searchResults';
 
 import store from './app/store';
 
 const RootStack = createStackNavigator(
   {
     Home: {
-      screen: HomeScreen
+      screen: HomeScreen,
     },
     BookDetails: {
-      screen: BookDetailsScreen
+      screen: BookDetailsScreen,
     },
     SearchResults: {
-      screen: SearchResultsScreen
-    }
+      screen: SearchResultsScreen,
+    },
   },
   {
-    initialRouteName: "Home"
-  }
+    initialRouteName: 'Home',
+  },
 );
 
-const AppContainer = createAppContainer(RootStack)
+const AppContainer = createAppContainer(RootStack);
 
-export default class App extends React.Component {
-
+export default class App extends React.PureComponent {
   render() {
- 
     return (
-      <Provider store={store}>
+      <Provider store={ store }>
         <AppContainer />
       </Provider>
     );

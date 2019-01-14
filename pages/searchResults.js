@@ -1,29 +1,11 @@
 import React from "react";
-import { Button, View, Text, FlatList, StyleSheet, TouchableOpacity } from "react-native";
+import { Button, View, Text, FlatList } from "react-native";
 import { connect } from "react-redux";
 import { fetchBooks } from "../app/actions/bookActions";
 import { bindActionCreators } from "redux";
-import SearchForm from "../app/components/search-form/search-form";
+import SearchForm from "../app/components/searchForm/searchForm";
+import ListItem from '../app/components/listItem/listItem';
 
-
-export class MyListItem extends React.PureComponent {
-  onPress = () => {
-    this.props.onPressItem(this.props.id);
-  };
-
-  render() {
-    const {item} = this.props;
-    return (
-      <TouchableOpacity onPress={this.onPress}>
-        <View>
-          <Text style={styles.listItem}>
-          {this.props.title}
-          </Text>
-        </View>
-      </TouchableOpacity>
-    );
-  }
-}
 export class SearchResultsScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -51,18 +33,15 @@ export class SearchResultsScreen extends React.Component {
   };
 
   renderItem = ({ item }) => (
-    <MyListItem
+    <ListItem
       id={item.id}
       onPressItem={this.onPressItem}
-      // selected={!!this.state.selected.get(item.id)}
       title={item.volumeInfo.title}
     />
   );
 
   render() {
     const { isFetching, results } = this.props.books;
-    console.log(this.props.books, "props");
-
     return isFetching || !results ? (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Text> Loading </Text>
@@ -79,28 +58,17 @@ export class SearchResultsScreen extends React.Component {
         <SearchForm onSubmit={values => this.fetchBooks(values.search)} />
         <FlatList
           data={this.props.books.results.items}
-          // extraData={this.state}
-        
           keyExtractor={this.keyExtractor}
           renderItem={this.renderItem}
         />
       </View>
-      
     );
   }
 }
 
-const styles = StyleSheet.create({
-  listItem: {
-    padding: 10,
-    fontWeight: "bold",
-    fontSize: 20
-  }
+const mapStateToProps = state => ({
+  books: state.books,
 });
-
-const mapStateToProps = state => {
-  return { books: state.books };
-};
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({ fetchBooks }, dispatch)
