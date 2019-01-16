@@ -17,9 +17,19 @@ export class HomeScreen extends React.Component {
 
   render() {
     return (
-      <View style={ { flex: 1, alignItems: 'center', justifyContent: 'center' } }>
-        <Text>Search for book</Text>
-        <SearchForm onSubmit={ values => this.handleSearchSubmit(values.search) } />
+      <View>
+        <SearchForm
+          onSubmit={ values => this.handleSearchSubmit(values.search) }
+        />
+        <View style={ {
+          height: '80%',
+          alignItems: 'center',
+          justifyContent: 'center',
+        } }
+        >
+          <Text> Google Books Search </Text>
+          <Text> React Native Expo Demo </Text>
+        </View>
       </View>
     );
   }

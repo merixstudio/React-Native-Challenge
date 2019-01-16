@@ -1,10 +1,17 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
-import { Button, View, Text, FlatList } from 'react-native';
+import { View, FlatList } from 'react-native';
 import { connect } from 'react-redux';
+import {
+  Thumbnail,
+  Button,
+  ListItem,
+  Text,
+  Right,
+  Body,
+} from 'native-base';
 import { fetchBooks } from '../app/actions/bookActions';
 import SearchForm from '../app/components/searchForm/searchForm';
-import ListItem from '../app/components/listItem/listItem';
 
 export class SearchResultsScreen extends React.Component {
   constructor(props) {
@@ -13,6 +20,7 @@ export class SearchResultsScreen extends React.Component {
     this.fetchBooks = this.fetchBooks.bind(this);
     this.keyExtractor = this.keyExtractor.bind(this);
     this.onPressItem = this.onPressItem.bind(this);
+    this.renderItem = this.renderItem.bind(this);
   }
 
   componentDidMount() {
@@ -38,31 +46,43 @@ export class SearchResultsScreen extends React.Component {
   renderItem({ item }) {
     return (
       <ListItem
-        id={ item.id }
-        onPressItem={ this.onPressItem }
-        title={ item.volumeInfo.title }
-      />
+        thumbnail
+        onPress={ () => this.onPressItem(item.id) }
+      >
+        <Thumbnail
+          square
+          source={ {
+            uri: item.volumeInfo.imageLinks
+              ? item.volumeInfo.imageLinks.smallThumbnail
+              : '/assets/icon.png',
+          } }
+        />
+        <Body>
+          <Text>
+            { item.volumeInfo.title }
+          </Text>
+          <Text note numberOfLines={ 1 }>{item.volumeInfo.description}</Text>
+        </Body>
+        <Right>
+          <Button transparent onPress={ () => this.onPressItem(item.id) }>
+            <Text>View</Text>
+          </Button>
+        </Right>
+      </ListItem>
     );
   }
 
   render() {
-    const { navigation, books } = this.props;
+    const { books } = this.props;
     const { isFetching, results } = books;
- 
+
     return isFetching || !results ? (
       <View style={ { flex: 1, alignItems: 'center', justifyContent: 'center' } }>
         <Text> Loading </Text>
       </View>
     ) : (
       <View style={ { flex: 1, justifyContent: 'center' } }>
-        <Text>Search Results Screen</Text>
-        <View style={ { flex: 1, flexDirection: 'row' } }>
-          <Button
-            title="Go to Home"
-            onPress={ () => navigation.navigate('Home') }
-          />
-        </View>
-        <SearchForm onSubmit={values => this.fetchBooks(values.search) } />
+        <SearchForm onSubmit={ values => this.fetchBooks(values.search) } />
         <FlatList
           data={ books.results.items }
           keyExtractor={ this.keyExtractor }
@@ -78,7 +98,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ fetchBooks }, dispatch)
+  actions: bindActionCreators({ fetchBooks }, dispatch),
 });
 
 export default connect(
