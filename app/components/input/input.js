@@ -4,5 +4,10 @@ import {
 } from 'native-base';
 
 export default function CustomInput({ placeholder, input: { onChange, ...restInput } }) {
-  return <Input onChangeText={ onChange } { ...restInput } placeholder={ placeholder } />;
+  return (
+    <Input
+      onChangeText={ onChange }
+      { ...restInput }
+      placeholder={ placeholder } />
+  );
 }

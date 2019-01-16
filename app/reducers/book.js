@@ -3,7 +3,8 @@ import { booksActionsTypes } from '../actions/bookActions';
 const INITIAL_STATE = {
   current: null,
   results: null,
-  errors: [],
+  query: null,
+  error: null,
   isFetching: false,
 };
 
@@ -12,6 +13,8 @@ const bookReducer = (state = INITIAL_STATE, { type, payload }) => {
     case booksActionsTypes.SEARCH_REQUEST: {
       return {
         ...state,
+        error: null,
+        query: payload,
         isFetching: true,
       };
     }
@@ -25,6 +28,7 @@ const bookReducer = (state = INITIAL_STATE, { type, payload }) => {
     case booksActionsTypes.BOOK_DETAILS_REQUEST: {
       return {
         ...state,
+        error: null,
         isFetching: true,
       };
     }
@@ -39,7 +43,7 @@ const bookReducer = (state = INITIAL_STATE, { type, payload }) => {
     case booksActionsTypes.BOOK_DETAILS_ERROR: {
       return {
         ...state,
-        errors: [payload],
+        error: payload,
         isFetching: false,
       };
     }

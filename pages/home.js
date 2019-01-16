@@ -11,6 +11,7 @@ export class HomeScreen extends React.Component {
   }
 
   handleSearchSubmit(query) {
+    if (!query) return;
     const { navigation } = this.props;
     navigation.navigate('SearchResults', { query });
   }

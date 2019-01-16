@@ -13,40 +13,45 @@ export const booksActionsTypes = {
   BOOK_DETAILS_ERROR: `${prefix} BOOK Details Error`,
 };
 
-export const searchRequest = () => ({
+export const searchRequest = payload => ({
   type: booksActionsTypes.SEARCH_REQUEST,
+  payload,
 });
-export const searchSuccess = payload => ({ type: booksActionsTypes.SEARCH_SUCCESS, payload });
-export const searchError = payload => ({ type: booksActionsTypes.SEARCH_ERROR, payload });
+export const searchSuccess = payload => ({
+  type: booksActionsTypes.SEARCH_SUCCESS,
+  payload,
+});
+export const searchError = payload => ({
+  type: booksActionsTypes.SEARCH_ERROR,
+  payload,
+});
 
-export const bookDetailsRequest = () => ({ type: booksActionsTypes.BOOK_DETAILS_REQUEST });
+export const bookDetailsRequest = () => ({
+  type: booksActionsTypes.BOOK_DETAILS_REQUEST,
+});
 export const bookDetailsSuccess = payload => ({
   type: booksActionsTypes.BOOK_DETAILS_SUCCESS,
   payload,
 });
-export const bookDetailsError = payload => (
-  { type: booksActionsTypes.BOOK_DETAILS_ERROR, payload }
-);
+export const bookDetailsError = payload => ({
+  type: booksActionsTypes.BOOK_DETAILS_ERROR, payload,
+});
 
 
-export const fetchBooks = (searchPhrase) => {
-  return async (dispatch) => {
-    dispatch(searchRequest());
-    const response = await axios.get(`${googleApiUrl}/volumes?q=${searchPhrase}`);
-    if (response.status === 200) {
-      return dispatch(searchSuccess(response.data));
-    }
-    return dispatch(searchError(response.data));
-  };
+export const fetchBooks = searchPhrase => (dispatch) => {
+  dispatch(searchRequest(searchPhrase));
+
+  return axios.get(`${googleApiUrl}/volumes?q=${searchPhrase}`).then(
+    response => dispatch(searchSuccess(response.data)),
+    error => dispatch(searchError(error.response)),
+  );
 };
 
-export const fetchBookDetails = (bookId) => {
-  return async (dispatch) => {
-    dispatch(bookDetailsRequest());
-    const response = await axios.get(`${googleApiUrl}/volumes/${bookId}`);
-    if (response.status === 200) {
-      return dispatch(bookDetailsSuccess(response.data));
-    }
-    return dispatch(bookDetailsError(response.data));
-  };
+export const fetchBookDetails = bookId => (dispatch) => {
+  dispatch(bookDetailsRequest());
+
+  return axios.get(`${googleApiUrl}/volumes/${bookId}`).then(
+    response => dispatch(bookDetailsSuccess(response.data)),
+    error => dispatch(bookDetailsError(error.response)),
+  );
 };

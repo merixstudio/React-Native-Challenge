@@ -10,12 +10,16 @@ import {
 } from 'native-base';
 import CustomInput from '../input/input';
 
-const SearchForm = ({ onSubmit, handleSubmit, value }) => (
+const SearchForm = ({ onSubmit, handleSubmit }) => (
   <View>
     <Header searchBar rounded>
       <Item>
         <Icon name="ios-search" />
-        <Field name="search" placeholder="Search for books..." component={ CustomInput } value={ value } />
+        <Field
+          name="search"
+          placeholder="Search for books..."
+          component={ CustomInput }
+        />
       </Item>
       <Button onPress={ handleSubmit(onSubmit) } transparent>
         <Text>Search</Text>

@@ -23,6 +23,8 @@ module.exports =
           "jsx-a11y/anchor-is-valid": ["warn", { "aspects": ["invalidHref"] }],
           "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
           "object-curly-spacing": [2, "always"],
-          "react/jsx-curly-spacing": [2, {"when": "always"}]
+          "react/jsx-curly-spacing": [2, {"when": "always"}],
+          "react/jsx-closing-bracket-location": [1, "line-aligned"],
+          
         },
     };
