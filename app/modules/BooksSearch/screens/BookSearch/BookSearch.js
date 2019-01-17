@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
-import SearchForm from '../app/components/searchForm/searchForm';
+import SearchForm from '../../../../common/searchForm/searchForm';
 
-export class HomeScreen extends React.Component {
+export class BookSearch extends React.Component {
   constructor(props) {
     super(props);
 
@@ -11,8 +11,9 @@ export class HomeScreen extends React.Component {
   }
 
   handleSearchSubmit(query) {
+    if (!query) return;
     const { navigation } = this.props;
-    navigation.navigate('SearchResults', { query });
+    navigation.navigate('BookSearchResults', { query });
   }
 
   render() {
@@ -39,4 +40,4 @@ const mapStateToProps = state => ({
   books: state.books,
 });
 
-export default connect(mapStateToProps)(HomeScreen);
+export default connect(mapStateToProps)(BookSearch);
