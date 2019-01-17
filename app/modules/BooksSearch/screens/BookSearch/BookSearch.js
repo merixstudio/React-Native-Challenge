@@ -20,6 +20,7 @@ export class BookSearch extends React.Component {
     return (
       <View>
         <SearchForm
+          placeholder="Search for books..."
           onSubmit={ values => this.handleSearchSubmit(values.search) }
         />
         <View style={ {
