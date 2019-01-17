@@ -2,8 +2,9 @@
 
 import React from 'react';
 import { View, Text } from 'react-native';
+import PropTypes from 'prop-types';
 
-export default function RenderMessage({ message }) {
+function RenderMessage({ message }) {
   return (
     <View style={ {
       flex: 1,
@@ -18,3 +19,9 @@ export default function RenderMessage({ message }) {
     </View>
   );
 }
+
+RenderMessage.propTypes = {
+  message: PropTypes.string.isRequired,
+};
+
+export default RenderMessage;

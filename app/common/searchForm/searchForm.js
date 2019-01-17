@@ -1,5 +1,7 @@
+
 import React from 'react';
 import { View } from 'react-native';
+import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import {
   Header,
@@ -8,6 +10,7 @@ import {
   Button,
   Text,
 } from 'native-base';
+
 import CustomInput from '../input/input';
 
 const SearchForm = ({ onSubmit, handleSubmit }) => (
@@ -27,6 +30,11 @@ const SearchForm = ({ onSubmit, handleSubmit }) => (
     </Header>
   </View>
 );
+
+SearchForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+};
 
 export default reduxForm({
   form: 'searchForm',

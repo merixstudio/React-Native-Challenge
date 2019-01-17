@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import PropTypes from 'prop-types';
 
-export default function RenderError({ error }) {
+function RenderError({ error }) {
   const message = `Something went wrong... 
     Error ${error.status} : ${error.data}!`;
 
@@ -20,3 +21,12 @@ export default function RenderError({ error }) {
     </View>
   );
 }
+
+RenderError.propTypes = {
+  error: PropTypes.shape({
+    status: PropTypes.number,
+    data: PropTypes.string,
+  }).isRequired,
+};
+
+export default RenderError;

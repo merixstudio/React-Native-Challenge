@@ -18,13 +18,15 @@ module.exports =
           "class-methods-use-this": 0,
           "arrow-body-style": [2, "as-needed"],
           "no-confusing-arrow": [2, {"allowParens": true}],
-          "react/prop-types": 0,
+          "react/prop-types": 2,
           "jsx-a11y/href-no-hash": "off",
           "jsx-a11y/anchor-is-valid": ["warn", { "aspects": ["invalidHref"] }],
           "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
           "object-curly-spacing": [2, "always"],
           "react/jsx-curly-spacing": [2, {"when": "always"}],
           "react/jsx-closing-bracket-location": [1, "line-aligned"],
+          
+          "react/prop-types": ["error", { "ignore": ["navigation"] }]
           
         },
     };

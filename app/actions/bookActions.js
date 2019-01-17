@@ -38,20 +38,25 @@ export const bookDetailsError = payload => ({
 });
 
 
-export const fetchBooks = searchPhrase => (dispatch) => {
-  dispatch(searchRequest(searchPhrase));
-
-  return axios.get(`${googleApiUrl}/volumes?q=${searchPhrase}`).then(
-    response => dispatch(searchSuccess(response.data)),
-    error => dispatch(searchError(error.response)),
-  );
-};
-
 export const fetchBookDetails = bookId => (dispatch) => {
   dispatch(bookDetailsRequest());
 
-  return axios.get(`${googleApiUrl}/volumes/${bookId}`).then(
-    response => dispatch(bookDetailsSuccess(response.data)),
-    error => dispatch(bookDetailsError(error.response)),
-  );
+  return axios
+    .get(`${googleApiUrl}/volumes/${bookId}`)
+    .then(
+      response => dispatch(bookDetailsSuccess(response.data)),
+      error => dispatch(bookDetailsError(error.response)),
+    );
+};
+
+
+export const fetchBooks = searchPhrase => (dispatch) => {
+  dispatch(searchRequest(searchPhrase));
+
+  return axios
+    .get(`${googleApiUrl}/volumes?q=${searchPhrase}`)
+    .then(
+      response => dispatch(searchSuccess(response.data)),
+      error => dispatch(searchError(error.response)),
+    );
 };
