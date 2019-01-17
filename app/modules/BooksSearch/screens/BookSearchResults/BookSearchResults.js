@@ -64,6 +64,7 @@ export class BookSearchResults extends React.Component {
       return (
         <View style={ { flex: 1, justifyContent: 'center' } }>
           <SearchForm
+            placeholder="Search for books..."
             onSubmit={ values => this.fetchBooks(values.search) }
             initialValues={ { search: query } }
           />
@@ -78,6 +79,7 @@ export class BookSearchResults extends React.Component {
     return (
       <View>
         <SearchForm
+          placeholder="Search for books..."
           onSubmit={ values => this.fetchBooks(values.search) }
           initialValues={ { search: query } }
         />

@@ -13,14 +13,14 @@ import {
 
 import CustomInput from '../input/input';
 
-const SearchForm = ({ onSubmit, handleSubmit }) => (
+const SearchForm = ({ onSubmit, handleSubmit, placeholder }) => (
   <View>
     <Header searchBar rounded>
       <Item>
         <Icon name="ios-search" />
         <Field
           name="search"
-          placeholder="Search for books..."
+          placeholder={ placeholder }
           component={ CustomInput }
         />
       </Item>
@@ -32,6 +32,7 @@ const SearchForm = ({ onSubmit, handleSubmit }) => (
 );
 
 SearchForm.propTypes = {
+  placeholder: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
 };

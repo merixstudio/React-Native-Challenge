@@ -5,6 +5,7 @@ import store from './app/store/store';
 import BookSearchNavigator from './app/modules/BooksSearch/routing';
 
 const AppContainer = createAppContainer(BookSearchNavigator);
+
 export default class App extends React.PureComponent {
   render() {
     return (
