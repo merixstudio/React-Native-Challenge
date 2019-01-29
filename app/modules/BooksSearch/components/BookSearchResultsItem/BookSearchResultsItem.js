@@ -34,7 +34,7 @@ export class BookSearchResultsItem extends React.Component {
           <Text note numberOfLines={ 1 }>{item.volumeInfo.description}</Text>
         </Body>
         <Right>
-          <Button transparent onPress={ () => this.onPressItem(item.id) }>
+          <Button transparent onPress={ () => onPressItem(item.id) }>
             <Text>View</Text>
           </Button>
         </Right>
