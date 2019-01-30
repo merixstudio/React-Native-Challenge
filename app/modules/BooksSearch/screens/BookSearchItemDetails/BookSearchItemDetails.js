@@ -1,15 +1,17 @@
 import React from 'react';
-import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import {
   Container,
   Content,
 } from 'native-base';
-import { connect } from 'react-redux';
-import { fetchBookDetails } from '../../../../actions/bookActions';
+
+import { BookSearchItemDetailsCard } from '../../components/BookSearchItemDetailsCard/BookSearchItemDetailsCard';
 import RenderError from '../../../../common/error/error';
 import RenderMessage from '../../../../common/message/message';
-import { BookSearchItemDetailsCard } from '../../components/BookSearchItemDetailsCard/BookSearchItemDetailsCard';
+
+import { fetchBookDetails } from '../../../../actions/bookActions';
 
 export class BookSearchItemDetails extends React.Component {
   constructor(props) {

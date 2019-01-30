@@ -1,17 +1,21 @@
 import React from 'react';
-import { bindActionCreators } from 'redux';
-import { View, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import {
+  View,
+  FlatList,
+} from 'react-native';
 import {
   Text,
 } from 'native-base';
 
+import BookSearchResultsItem from '../../components/BookSearchResultsItem/BookSearchResultsItem';
 import SearchForm from '../../../../common/searchForm/searchForm';
 import RenderError from '../../../../common/error/error';
 import RenderMessage from '../../../../common/message/message';
+
 import { fetchBooks } from '../../../../actions/bookActions';
-import BookSearchResultsItem from '../../components/BookSearchResultsItem/BookSearchResultsItem';
 
 export class BookSearchResults extends React.Component {
   constructor(props) {

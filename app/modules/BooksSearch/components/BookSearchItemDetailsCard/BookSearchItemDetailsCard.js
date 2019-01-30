@@ -1,8 +1,10 @@
-
-
 import React from 'react';
-import { FlatList, View, Image } from 'react-native';
 import PropTypes from 'prop-types';
+import {
+  FlatList,
+  View,
+  Image,
+} from 'react-native';
 import {
   Card,
   CardItem,

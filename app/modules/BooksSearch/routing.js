@@ -1,6 +1,5 @@
-
-
 import { createStackNavigator } from 'react-navigation';
+
 import BookSearchResults from './screens/BookSearchResults/BookSearchResults';
 import BookSearchItemDetails from './screens/BookSearchItemDetails/BookSearchItemDetails';
 import BookSearch from './screens/BookSearch/BookSearch';

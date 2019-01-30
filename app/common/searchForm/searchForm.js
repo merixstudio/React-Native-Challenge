@@ -1,8 +1,11 @@
 
 import React from 'react';
-import { View } from 'react-native';
 import PropTypes from 'prop-types';
-import { Field, reduxForm } from 'redux-form';
+import { View } from 'react-native';
+import {
+  Field,
+  reduxForm, 
+} from 'redux-form';
 import {
   Header,
   Item,

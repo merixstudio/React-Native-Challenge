@@ -1,8 +1,9 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { createAppContainer } from 'react-navigation';
-import store from './app/store/store';
+
 import BookSearchNavigator from './app/modules/BooksSearch/routing';
+import store from './app/store/store';
 
 const AppContainer = createAppContainer(BookSearchNavigator);
 

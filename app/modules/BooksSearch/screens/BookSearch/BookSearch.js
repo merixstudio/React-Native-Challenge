@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
+
 import SearchForm from '../../../../common/searchForm/searchForm';
 
 export class BookSearch extends React.Component {

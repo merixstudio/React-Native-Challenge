@@ -1,6 +1,9 @@
 import React from 'react';
-import { View, Text } from 'react-native';
 import PropTypes from 'prop-types';
+import {
+  View,
+  Text,
+} from 'react-native';
 
 function RenderError({ error }) {
   const message = `Something went wrong... 

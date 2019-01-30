@@ -1,8 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Input,
 } from 'native-base';
-import PropTypes from 'prop-types';
 
 function CustomInput({ placeholder, input: { onChange, ...restInput } }) {
   return (
