@@ -32,7 +32,9 @@ class BookSearchItemDetails extends React.Component {
   }
 
   render() {
-    const { current, isFetching, error } = this.props;
+    const {
+      current, isFetching, error,
+    } = this.props;
     if (isFetching) { return (<RenderMessage message="Loading..." />); }
     if (error) { return (<RenderError error={ error } />); }
     if (current) {
