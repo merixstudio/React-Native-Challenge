@@ -9,7 +9,7 @@ module.exports =
           "import/named": 0,
           "import/namespace": 0,
           "import/no-unresolved": 0,
-          "import/no-named-as-default": 0,
+          "import/no-named-as-default": 2,
           "comma-dangle": 2,
           "indent": [2, 2, {"SwitchCase": 1}],
           "no-console": 0,
