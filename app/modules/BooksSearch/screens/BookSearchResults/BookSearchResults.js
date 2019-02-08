@@ -18,6 +18,10 @@ import RenderMessage from '../../../../common/message/message';
 import { fetchBooks } from '../../../../actions/bookActions';
 
 class BookSearchResults extends React.Component {
+  static navigationOptions() {
+    return { header: null };
+  }
+
   constructor(props) {
     super(props);
 
@@ -28,9 +32,7 @@ class BookSearchResults extends React.Component {
   }
 
   componentDidMount() {
-    const { navigation } = this.props;
-    const query = navigation.getParam('query', 'NO-ID');
-    this.fetchBooks(query);
+    this.fetchBooks();
   }
 
   onPressItem(id) {
@@ -38,10 +40,12 @@ class BookSearchResults extends React.Component {
     navigation.navigate('BookSearchItemDetails', { id });
   }
 
-  fetchBooks(query) {
-    if (!query) { return; }
-    const { actions } = this.props;
-    actions.fetchBooks(query);
+  fetchBooks(phrase) {
+    const { navigation, actions } = this.props;
+    const query = phrase || navigation.getParam('query', 'NO-ID');
+    if (query) {
+      actions.fetchBooks(query);
+    }
   }
 
   keyExtractor(item) {

@@ -5,6 +5,10 @@ import { connect } from 'react-redux';
 import SearchForm from '../../../../common/searchForm/searchForm';
 
 class BookSearch extends React.Component {
+  static navigationOptions() {
+    return { header: null };
+  }
+
   constructor(props) {
     super(props);
 
