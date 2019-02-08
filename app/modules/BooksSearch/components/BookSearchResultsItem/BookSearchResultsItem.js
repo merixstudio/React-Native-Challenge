@@ -9,37 +9,32 @@ import {
   ListItem,
 } from 'native-base';
 
-export class BookSearchResultsItem extends React.Component {
-  render() {
-    const { item, onPressItem } = this.props;
-    return (
-      <ListItem
-        thumbnail
-        onPress={ () => onPressItem(item.id) }
-      >
-        <Thumbnail
-          square
-          source={ {
-            uri: item.volumeInfo.imageLinks
-              ? item.volumeInfo.imageLinks.smallThumbnail
-              : '/assets/icon.png',
-          } }
-        />
-        <Body>
-          <Text>
-            { item.volumeInfo.title }
-          </Text>
-          <Text note numberOfLines={ 1 }>{item.volumeInfo.description}</Text>
-        </Body>
-        <Right>
-          <Button transparent onPress={ () => onPressItem(item.id) }>
-            <Text>View</Text>
-          </Button>
-        </Right>
-      </ListItem>
-    );
-  }
-}
+const BookSearchResultsItem = ({ item, onPressItem }) => (
+  <ListItem
+    thumbnail
+    onPress={ () => onPressItem(item.id) }
+  >
+    <Thumbnail
+      square
+      source={ {
+        uri: item.volumeInfo.imageLinks
+          ? item.volumeInfo.imageLinks.smallThumbnail
+          : '/assets/icon.png',
+      } }
+    />
+    <Body>
+      <Text>
+        { item.volumeInfo.title }
+      </Text>
+      <Text note numberOfLines={ 1 }>{item.volumeInfo.description}</Text>
+    </Body>
+    <Right>
+      <Button transparent onPress={ () => onPressItem(item.id) }>
+        <Text>View</Text>
+      </Button>
+    </Right>
+  </ListItem>
+);
 
 
 BookSearchResultsItem.propTypes = {

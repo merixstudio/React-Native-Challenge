@@ -7,7 +7,7 @@ import {
   Content,
 } from 'native-base';
 
-import { BookSearchItemDetailsCard } from '../../components/BookSearchItemDetailsCard/BookSearchItemDetailsCard';
+import BookSearchItemDetailsCard from '../../components/BookSearchItemDetailsCard/BookSearchItemDetailsCard';
 import RenderError from '../../../../common/error/error';
 import RenderMessage from '../../../../common/message/message';
 

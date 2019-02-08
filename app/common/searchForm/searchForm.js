@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { View } from 'react-native';
 import {
   Field,
-  reduxForm, 
+  reduxForm,
 } from 'redux-form';
 import {
   Header,
