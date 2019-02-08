@@ -17,7 +17,7 @@ import RenderMessage from '../../../../common/message/message';
 
 import { fetchBooks } from '../../../../actions/bookActions';
 
-export class BookSearchResults extends React.Component {
+class BookSearchResults extends React.Component {
   constructor(props) {
     super(props);
 

@@ -13,7 +13,7 @@ import RenderMessage from '../../../../common/message/message';
 
 import { fetchBookDetails } from '../../../../actions/bookActions';
 
-export class BookSearchItemDetails extends React.Component {
+class BookSearchItemDetails extends React.Component {
   constructor(props) {
     super(props);
 
