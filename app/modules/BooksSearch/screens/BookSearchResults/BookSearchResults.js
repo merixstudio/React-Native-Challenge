@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import {
   Text,
+  Container,
 } from 'native-base';
 
 import BookSearchResultsItem from '../../components/BookSearchResultsItem/BookSearchResultsItem';
@@ -70,7 +71,7 @@ class BookSearchResults extends React.Component {
     if (error) { return (<RenderError error={ error } />); }
     if (results && results.items) {
       return (
-        <View style={ { flex: 1, justifyContent: 'center' } }>
+        <Container style={ { flex: 1, justifyContent: 'center' } }>
           <SearchForm
             placeholder="Search for books..."
             onSubmit={ values => this.fetchBooks(values.search) }
@@ -81,11 +82,11 @@ class BookSearchResults extends React.Component {
             keyExtractor={ this.keyExtractor }
             renderItem={ this.renderItem }
           />
-        </View>
+        </Container>
       );
     }
     return (
-      <View>
+      <Container>
         <SearchForm
           placeholder="Search for books..."
           onSubmit={ values => this.fetchBooks(values.search) }
@@ -101,7 +102,7 @@ class BookSearchResults extends React.Component {
             No results for this phrase...
           </Text>
         </View>
-      </View>
+      </Container>
     );
   }
 }
