@@ -13,16 +13,17 @@ import {
   Button,
   Text,
 } from 'native-base';
-
+import { Platform } from 'react-native';
 import CustomInput from '../input/input';
 
 const SearchForm = ({ onSubmit, handleSubmit, placeholder }) => (
   <View>
-    <Header searchBar rounded>
+    <Header style={ { marginTop: Platform === 'ios' ? 5 : 25 } } searchBar rounded>
       <Item>
         <Icon name="ios-search" />
         <Field
           name="search"
+          onSubmitEditing={ handleSubmit(onSubmit) }
           placeholder={ placeholder }
           component={ CustomInput }
         />

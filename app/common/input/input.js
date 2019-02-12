@@ -4,9 +4,10 @@ import {
   Input,
 } from 'native-base';
 
-function CustomInput({ placeholder, input: { onChange, ...restInput } }) {
+function CustomInput({ placeholder, onSubmitEditing, input: { onChange, ...restInput } }) {
   return (
     <Input
+      onSubmitEditing={ onSubmitEditing }
       onChangeText={ onChange }
       { ...restInput }
       placeholder={ placeholder }
@@ -15,6 +16,7 @@ function CustomInput({ placeholder, input: { onChange, ...restInput } }) {
 }
 
 CustomInput.propTypes = {
+  onSubmitEditing: PropTypes.func.isRequired,
   placeholder: PropTypes.string.isRequired,
   input: PropTypes.shape({
     onChange: PropTypes.func,
