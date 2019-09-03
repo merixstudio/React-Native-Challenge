@@ -28,11 +28,12 @@ class BookSearch extends React.Component {
           placeholder="Search for books..."
           onSubmit={ values => this.handleSearchSubmit(values.search) }
         />
-        <View style={ {
-          height: '80%',
-          alignItems: 'center',
-          justifyContent: 'center',
-        } }
+        <View
+          style={ {
+            height: '80%',
+            alignItems: 'center',
+            justifyContent: 'center',
+          } }
         >
           <Text> Google Books Search </Text>
           <Text> React Native Expo Demo </Text>

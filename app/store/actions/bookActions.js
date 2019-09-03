@@ -8,9 +8,9 @@ export const booksActionsTypes = {
   SEARCH_SUCCESS: `${prefix} Search Success`,
   SEARCH_ERROR: `${prefix} Search Error`,
 
-  BOOK_DETAILS_REQUEST: `${prefix} BOOK Details Request`,
-  BOOK_DETAILS_SUCCESS: `${prefix} BOOK Details Success`,
-  BOOK_DETAILS_ERROR: `${prefix} BOOK Details Error`,
+  BOOK_DETAILS_REQUEST: `${prefix} Book Details Request`,
+  BOOK_DETAILS_SUCCESS: `${prefix} Book Details Success`,
+  BOOK_DETAILS_ERROR: `${prefix} Book Details Error`,
 };
 
 export const searchRequest = payload => ({
@@ -34,9 +34,9 @@ export const bookDetailsSuccess = payload => ({
   payload,
 });
 export const bookDetailsError = payload => ({
-  type: booksActionsTypes.BOOK_DETAILS_ERROR, payload,
+  type: booksActionsTypes.BOOK_DETAILS_ERROR,
+  payload,
 });
-
 
 export const fetchBookDetails = bookId => (dispatch) => {
   dispatch(bookDetailsRequest());
@@ -48,7 +48,6 @@ export const fetchBookDetails = bookId => (dispatch) => {
       error => dispatch(bookDetailsError(error.response)),
     );
 };
-
 
 export const fetchBooks = searchPhrase => (dispatch) => {
   dispatch(searchRequest(searchPhrase));
