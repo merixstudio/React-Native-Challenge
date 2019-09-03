@@ -10,7 +10,7 @@ import CustomInput from './input';
 
 const SearchForm = ({ onSubmit, handleSubmit, placeholder }) => (
   <View>
-    <Header style={ { marginTop: Platform === 'ios' ? 5 : 25 } } searchBar rounded>
+    <Header style={ { marginTop: Platform.OS === 'ios' ? 5 : 25 } } searchBar rounded>
       <Item>
         <Icon name="ios-search" />
         <Field
