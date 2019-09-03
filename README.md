@@ -1,17 +1,22 @@
-
 #### Prerequisites
-* [Node.js](https://nodejs.org/en/) - Js runtime environment
-* [Yarn](https://yarnpkg.com/en/T) - Dependency manager
-* [Expo app](https://play.google.com/store/apps/details?id=host.exp.exponent&hl=en).
- 
+
+- [Node.js](https://nodejs.org/en/) - Js runtime environment
+- [npm](https://npmjs.com) - Dependency manager
+- [Expo app](https://play.google.com/store/apps/details?id=host.exp.exponent&hl=en).
+
 ### Installation
-Install all the dependencies using yarn
+
+Install all the dependencies using npm
+
 ```sh
-$ yarn
+$ npm install
 ```
+
 ### Running for dev
+
 ```sh
-$ yarn start
+$ npm start
 ```
+
 To run application directly on Android phones scan the QR code from console with the [Expo app](https://play.google.com/store/apps/details?id=host.exp.exponent&hl=en).
 Make sure that your device is on the same network as the server.
