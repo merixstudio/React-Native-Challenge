@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { createAppContainer } from 'react-navigation';
 import { Root } from 'native-base';
 import { Font, AppLoading } from 'expo';
-import BookSearchNavigator from './app/modules/BooksSearch/routing';
+import BookSearchNavigator from './app/modules/BookSearch/routing';
 import store from './app/store/store';
 
 const AppContainer = createAppContainer(BookSearchNavigator);
