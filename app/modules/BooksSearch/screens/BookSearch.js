@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 
-import SearchForm from '../../../../common/searchForm/searchForm';
+import SearchForm from '../../../common/searchForm';
 
 class BookSearch extends React.Component {
   static navigationOptions() {

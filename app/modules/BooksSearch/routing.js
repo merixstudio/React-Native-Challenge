@@ -1,8 +1,8 @@
 import { createStackNavigator } from 'react-navigation';
 
-import BookSearchResults from './screens/BookSearchResults/BookSearchResults';
-import BookSearchItemDetails from './screens/BookSearchItemDetails/BookSearchItemDetails';
-import BookSearch from './screens/BookSearch/BookSearch';
+import BookSearchResults from './screens/BookSearchResults';
+import BookSearchItemDetails from './screens/BookSearchItemDetails';
+import BookSearch from './screens/BookSearch';
 
 const BookSearchNavigator = createStackNavigator({
   BookSearch: {

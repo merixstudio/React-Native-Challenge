@@ -1,20 +1,12 @@
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
+import { Field, reduxForm } from 'redux-form';
 import {
-  Field,
-  reduxForm,
-} from 'redux-form';
-import {
-  Header,
-  Item,
-  Icon,
-  Button,
-  Text,
+  Header, Item, Icon, Button, Text,
 } from 'native-base';
 import { Platform } from 'react-native';
-import CustomInput from '../input/input';
+import CustomInput from './input';
 
 const SearchForm = ({ onSubmit, handleSubmit, placeholder }) => (
   <View>

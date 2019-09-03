@@ -2,21 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import {
-  View,
-  FlatList,
-} from 'react-native';
-import {
-  Text,
-  Container,
-} from 'native-base';
+import { View, FlatList } from 'react-native';
+import { Text, Container } from 'native-base';
 
-import BookSearchResultsItem from '../../components/BookSearchResultsItem/BookSearchResultsItem';
-import SearchForm from '../../../../common/searchForm/searchForm';
-import RenderError from '../../../../common/error/error';
-import RenderMessage from '../../../../common/message/message';
+import BookSearchResultsItem from '../components/BookSearchResultsItem';
+import SearchForm from '../../../common/searchForm';
+import RenderError from '../../../common/error';
+import RenderMessage from '../../../common/message';
 
-import { fetchBooks } from '../../../../actions/bookActions';
+import { fetchBooks } from '../../../store/actions/bookActions';
 
 class BookSearchResults extends React.Component {
   static navigationOptions() {
@@ -54,21 +48,20 @@ class BookSearchResults extends React.Component {
   }
 
   renderItem({ item }) {
-    return (
-      <BookSearchResultsItem item={ item } onPressItem={ this.onPressItem } />
-    );
+    return <BookSearchResultsItem item={ item } onPressItem={ this.onPressItem } />;
   }
 
   render() {
     const {
-      isFetching,
-      results,
-      query,
-      error,
+      isFetching, results, query, error,
     } = this.props;
 
-    if (isFetching) { return (<RenderMessage message="Loading..." />); }
-    if (error) { return (<RenderError error={ error } />); }
+    if (isFetching) {
+      return <RenderMessage message="Loading..." />;
+    }
+    if (error) {
+      return <RenderError error={ error } />;
+    }
     if (results && results.items) {
       return (
         <Container style={ { flex: 1, justifyContent: 'center' } }>
@@ -92,15 +85,14 @@ class BookSearchResults extends React.Component {
           onSubmit={ values => this.fetchBooks(values.search) }
           initialValues={ { search: query } }
         />
-        <View style={ {
-          height: '80%',
-          alignItems: 'center',
-          justifyContent: 'center',
-        } }
+        <View
+          style={ {
+            height: '80%',
+            alignItems: 'center',
+            justifyContent: 'center',
+          } }
         >
-          <Text>
-            No results for this phrase...
-          </Text>
+          <Text>No results for this phrase...</Text>
         </View>
       </Container>
     );
@@ -110,15 +102,17 @@ class BookSearchResults extends React.Component {
 BookSearchResults.propTypes = {
   results: PropTypes.oneOfType([
     PropTypes.shape({
-      items: PropTypes.arrayOf(PropTypes.shape({
-        volumeInfo: PropTypes.shape({
-          imageLinks: PropTypes.shape({
-            smallThumbnail: PropTypes.string,
+      items: PropTypes.arrayOf(
+        PropTypes.shape({
+          volumeInfo: PropTypes.shape({
+            imageLinks: PropTypes.shape({
+              smallThumbnail: PropTypes.string,
+            }),
+            title: PropTypes.string,
+            description: PropTypes.string,
           }),
-          title: PropTypes.string,
-          description: PropTypes.string,
         }),
-      })),
+      ),
     }),
     PropTypes.shape({ totalItems: PropTypes.number }),
   ]),
