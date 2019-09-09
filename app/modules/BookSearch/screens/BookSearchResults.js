@@ -2,11 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { View, FlatList } from 'react-native';
-import { Text, Container } from 'native-base';
+import { FlatList } from 'react-native';
+import {
+  Text,
+  Container,
+  Content,
+  Header,
+  Left,
+  Icon,
+  Body,
+  Button,
+  Title,
+  Right,
+} from 'native-base';
 
 import BookSearchResultsItem from '../components/BookSearchResultsItem';
-import SearchForm from '../../../common/searchForm';
 import RenderError from '../../../common/error';
 import RenderMessage from '../../../common/message';
 
@@ -53,8 +63,10 @@ class BookSearchResults extends React.Component {
 
   render() {
     const {
-      isFetching, results, query, error,
+      isFetching, results, error, navigation,
     } = this.props;
+
+    const data = (results && results.items) || [];
 
     if (isFetching) {
       return <RenderMessage message="Loading..." />;
@@ -62,38 +74,27 @@ class BookSearchResults extends React.Component {
     if (error) {
       return <RenderError error={ error } />;
     }
-    if (results && results.items) {
-      return (
-        <Container style={ { flex: 1, justifyContent: 'center' } }>
-          <SearchForm
-            placeholder="Search for books..."
-            onSubmit={ values => this.fetchBooks(values.search) }
-            initialValues={ { search: query } }
-          />
+    return (
+      <Container style={ { flex: 1, justifyContent: 'center' } }>
+        <Header>
+          <Left>
+            <Button transparent onPress={ () => navigation.goBack() }>
+              <Icon name="md-arrow-back" />
+            </Button>
+          </Left>
+          <Body>
+            <Title>Search results</Title>
+          </Body>
+          <Right />
+        </Header>
+        <Content>
           <FlatList
-            data={ results.items }
+            data={ data }
             keyExtractor={ this.keyExtractor }
             renderItem={ this.renderItem }
+            ListEmptyComponent={ <Text>No books found...</Text> }
           />
-        </Container>
-      );
-    }
-    return (
-      <Container>
-        <SearchForm
-          placeholder="Search for books..."
-          onSubmit={ values => this.fetchBooks(values.search) }
-          initialValues={ { search: query } }
-        />
-        <View
-          style={ {
-            height: '80%',
-            alignItems: 'center',
-            justifyContent: 'center',
-          } }
-        >
-          <Text>No results for this phrase...</Text>
-        </View>
+        </Content>
       </Container>
     );
   }
@@ -117,7 +118,6 @@ BookSearchResults.propTypes = {
     PropTypes.shape({ totalItems: PropTypes.number }),
   ]),
   isFetching: PropTypes.bool.isRequired,
-  query: PropTypes.string,
   error: PropTypes.shape({
     status: PropTypes.number,
     data: PropTypes.string,
@@ -129,7 +129,6 @@ BookSearchResults.propTypes = {
 
 BookSearchResults.defaultProps = {
   results: null,
-  query: '',
   error: null,
 };
 

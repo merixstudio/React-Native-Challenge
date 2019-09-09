@@ -1,38 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View } from 'react-native';
-import { Field, reduxForm } from 'redux-form';
 import {
-  Header, Item, Icon, Button, Text,
+  Header, Item, Icon, Button, Text, Input, Form,
 } from 'native-base';
-import { Platform } from 'react-native';
-import CustomInput from './input';
 
-const SearchForm = ({ onSubmit, handleSubmit, placeholder }) => (
-  <View>
-    <Header style={ { marginTop: Platform.OS === 'ios' ? 5 : 25 } } searchBar rounded>
+const SearchForm = ({
+  onSubmit, onChange, value, placeholder,
+}) => (
+  <Form>
+    <Header searchBar rounded>
       <Item>
         <Icon name="ios-search" />
-        <Field
-          name="search"
-          onSubmitEditing={ handleSubmit(onSubmit) }
+        <Input
+          onSubmitEditing={ () => onSubmit(value) }
+          onChangeText={ val => onChange(val) }
+          value={ value }
           placeholder={ placeholder }
-          component={ CustomInput }
         />
       </Item>
-      <Button onPress={ handleSubmit(onSubmit) } transparent>
+      <Button onPress={ onSubmit }>
         <Text>Search</Text>
       </Button>
     </Header>
-  </View>
+  </Form>
 );
 
 SearchForm.propTypes = {
   placeholder: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
 };
 
-export default reduxForm({
-  form: 'searchForm',
-})(SearchForm);
+export default SearchForm;

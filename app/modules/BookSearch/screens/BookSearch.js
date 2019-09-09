@@ -11,29 +11,37 @@ class BookSearch extends React.Component {
 
   constructor(props) {
     super(props);
-
-    this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
+    this.state = {
+      value: '',
+    };
   }
 
-  handleSearchSubmit(query) {
+  onChange = value => {
+    this.setState({ value });
+  };
+
+  handleSearchSubmit = query => {
     if (!query) return;
     const { navigation } = this.props;
     navigation.navigate('BookSearchResults', { query });
-  }
+  };
 
   render() {
+    const { value } = this.state;
     return (
-      <View>
+      <View style={{ flex: 1 }}>
         <SearchForm
           placeholder="Search for books..."
-          onSubmit={ values => this.handleSearchSubmit(values.search) }
+          onSubmit={this.handleSearchSubmit}
+          onChange={this.onChange}
+          value={value}
         />
         <View
-          style={ {
-            height: '80%',
+          style={{
+            flex: 1,
             alignItems: 'center',
             justifyContent: 'center',
-          } }
+          }}
         >
           <Text> Google Books Search </Text>
           <Text> React Native Expo Demo </Text>

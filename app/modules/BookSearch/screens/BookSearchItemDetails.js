@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Container, Content } from 'native-base';
+import {
+  Container, Content, Header, Left, Body, Title, Icon, Right, Button,
+} from 'native-base';
 
 import BookSearchItemDetailsCard from '../components/BookSearchItemDetailsCard';
 import RenderError from '../../../common/error';
@@ -11,6 +13,10 @@ import RenderMessage from '../../../common/message';
 import { fetchBookDetails } from '../../../store/actions/bookActions';
 
 class BookSearchItemDetails extends React.Component {
+  static navigationOptions() {
+    return { header: null };
+  }
+
   constructor(props) {
     super(props);
 
@@ -29,7 +35,9 @@ class BookSearchItemDetails extends React.Component {
   }
 
   render() {
-    const { current, isFetching, error } = this.props;
+    const {
+      current, isFetching, error, navigation,
+    } = this.props;
     if (isFetching) {
       return <RenderMessage message="Loading..." />;
     }
@@ -39,6 +47,17 @@ class BookSearchItemDetails extends React.Component {
     if (current) {
       return (
         <Container>
+          <Header>
+            <Left>
+              <Button transparent onPress={ () => navigation.goBack() }>
+                <Icon name="md-arrow-back" />
+              </Button>
+            </Left>
+            <Body>
+              <Title>Item details</Title>
+            </Body>
+            <Right />
+          </Header>
           <Content>
             <BookSearchItemDetailsCard current={ current } />
           </Content>
