@@ -77,9 +77,6 @@ BookSearchItemDetails.propTypes = {
     status: PropTypes.number,
     data: PropTypes.string,
   }),
-  actions: PropTypes.shape({
-    fetchBookDetails: PropTypes.func,
-  }).isRequired,
 };
 
 BookSearchItemDetails.defaultProps = {
