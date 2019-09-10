@@ -2,7 +2,8 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { createAppContainer } from 'react-navigation';
 import { Root } from 'native-base';
-import { Font, AppLoading } from 'expo';
+import { AppLoading } from 'expo';
+import * as Font from 'expo-font';
 import BookSearchNavigator from './app/modules/BookSearch/routing';
 import store from './app/store/store';
 
