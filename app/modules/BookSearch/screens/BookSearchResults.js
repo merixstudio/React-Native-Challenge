@@ -27,44 +27,29 @@ class BookSearchResults extends React.Component {
     return { header: null };
   }
 
-  constructor(props) {
-    super(props);
-
-    this.fetchBooks = this.fetchBooks.bind(this);
-    this.keyExtractor = this.keyExtractor.bind(this);
-    this.onPressItem = this.onPressItem.bind(this);
-    this.renderItem = this.renderItem.bind(this);
-  }
-
   componentDidMount() {
     this.fetchBooks();
   }
 
-  onPressItem(id) {
+  onPressItem = id => {
     const { navigation } = this.props;
     navigation.navigate('BookSearchItemDetails', { id });
-  }
+  };
 
-  fetchBooks(phrase) {
+  fetchBooks = phrase => {
     const { navigation, actions } = this.props;
     const query = phrase || navigation.getParam('query', 'NO-ID');
     if (query) {
       actions.fetchBooks(query);
     }
-  }
+  };
 
-  keyExtractor(item) {
-    return item.id;
-  }
+  keyExtractor = item => item.id;
 
-  renderItem({ item }) {
-    return <BookSearchResultsItem item={ item } onPressItem={ this.onPressItem } />;
-  }
+  renderItem = ({ item }) => <BookSearchResultsItem item={item} onPressItem={this.onPressItem} />;
 
   render() {
-    const {
-      isFetching, results, error, navigation,
-    } = this.props;
+    const { isFetching, results, error, navigation } = this.props;
 
     const data = (results && results.items) || [];
 
@@ -72,13 +57,13 @@ class BookSearchResults extends React.Component {
       return <RenderMessage message="Loading..." />;
     }
     if (error) {
-      return <RenderError error={ error } />;
+      return <RenderError error={error} />;
     }
     return (
-      <Container style={ { flex: 1, justifyContent: 'center' } }>
+      <Container style={{ flex: 1, justifyContent: 'center' }}>
         <Header>
           <Left>
-            <Button transparent onPress={ () => navigation.goBack() }>
+            <Button transparent onPress={() => navigation.goBack()}>
               <Icon name="md-arrow-back" />
             </Button>
           </Left>
@@ -89,10 +74,10 @@ class BookSearchResults extends React.Component {
         </Header>
         <Content>
           <FlatList
-            data={ data }
-            keyExtractor={ this.keyExtractor }
-            renderItem={ this.renderItem }
-            ListEmptyComponent={ <Text>No books found...</Text> }
+            data={data}
+            keyExtractor={this.keyExtractor}
+            renderItem={this.renderItem}
+            ListEmptyComponent={<Text>No books found...</Text>}
           />
         </Content>
       </Container>

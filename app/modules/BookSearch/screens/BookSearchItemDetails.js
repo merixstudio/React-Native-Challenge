@@ -2,9 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import {
-  Container, Content, Header, Left, Body, Title, Icon, Right, Button,
-} from 'native-base';
+import { Container, Content, Header, Left, Body, Title, Icon, Right, Button } from 'native-base';
 
 import BookSearchItemDetailsCard from '../components/BookSearchItemDetailsCard';
 import RenderError from '../../../common/error';
@@ -17,39 +15,31 @@ class BookSearchItemDetails extends React.Component {
     return { header: null };
   }
 
-  constructor(props) {
-    super(props);
-
-    this.fetchBookDetails = this.fetchBookDetails.bind(this);
-  }
-
   componentDidMount() {
     const { navigation } = this.props;
     const id = navigation.getParam('id', 'NO-ID');
     this.fetchBookDetails(id);
   }
 
-  fetchBookDetails(id) {
+  fetchBookDetails = id => {
     const { actions } = this.props;
     actions.fetchBookDetails(id);
-  }
+  };
 
   render() {
-    const {
-      current, isFetching, error, navigation,
-    } = this.props;
+    const { current, isFetching, error, navigation } = this.props;
     if (isFetching) {
       return <RenderMessage message="Loading..." />;
     }
     if (error) {
-      return <RenderError error={ error } />;
+      return <RenderError error={error} />;
     }
     if (current) {
       return (
         <Container>
           <Header>
             <Left>
-              <Button transparent onPress={ () => navigation.goBack() }>
+              <Button transparent onPress={() => navigation.goBack()}>
                 <Icon name="md-arrow-back" />
               </Button>
             </Left>
@@ -59,7 +49,7 @@ class BookSearchItemDetails extends React.Component {
             <Right />
           </Header>
           <Content>
-            <BookSearchItemDetailsCard current={ current } />
+            <BookSearchItemDetailsCard current={current} />
           </Content>
         </Container>
       );
