@@ -1,55 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 
 import SearchForm from '../../../common/searchForm';
 
-class BookSearch extends React.Component {
-  static navigationOptions() {
-    return { header: null };
-  }
+function BookSearch({ navigation }) {
+  const [value, onChange] = useState('');
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: '',
-    };
-  }
-
-  onChange = value => {
-    this.setState({ value });
-  };
-
-  handleSearchSubmit = query => {
+  const handleSearchSubmit = (query) => {
     if (!query) return;
-    const { navigation } = this.props;
     navigation.navigate('BookSearchResults', { query });
   };
 
-  render() {
-    const { value } = this.state;
-    return (
-      <View style={{ flex: 1 }}>
-        <SearchForm
-          placeholder="Search for books..."
-          onSubmit={this.handleSearchSubmit}
-          onChange={this.onChange}
-          value={value}
-        />
-        <View
-          style={{
-            flex: 1,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <Text> Google Books Search </Text>
-          <Text> React Native Expo Demo </Text>
-        </View>
+  return (
+    <View style={ { flex: 1 } }>
+      <SearchForm
+        placeholder="Search for books..."
+        onSubmit={ handleSearchSubmit }
+        onChange={ onChange }
+        value={ value }
+      />
+      <View
+        style={ {
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'center',
+        } }
+      >
+        <Text> Google Books Search </Text>
+        <Text> React Native Expo Demo </Text>
       </View>
-    );
-  }
+    </View>
+  );
 }
+
+BookSearch.navigationOptions = {
+  header: null,
+};
 
 const mapStateToProps = state => ({
   books: state.books,

@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { FlatList } from 'react-native';
 import {
@@ -22,68 +21,61 @@ import RenderMessage from '../../../common/message';
 
 import { fetchBooks } from '../../../store/actions/bookActions';
 
-class BookSearchResults extends React.Component {
-  static navigationOptions() {
-    return { header: null };
-  }
+function BookSearchResults({
+  isFetching, results, error, navigation, fetchBooksAction,
+}) {
+  useEffect(() => {
+    const query = navigation.getParam('query', 'NO-ID');
+    if (query) {
+      fetchBooksAction(query);
+    }
+  }, []);
 
-  componentDidMount() {
-    this.fetchBooks();
-  }
-
-  onPressItem = id => {
-    const { navigation } = this.props;
+  const onPressItem = (id) => {
     navigation.navigate('BookSearchItemDetails', { id });
   };
 
-  fetchBooks = phrase => {
-    const { navigation, fetchBooks } = this.props;
-    const query = phrase || navigation.getParam('query', 'NO-ID');
-    if (query) {
-      fetchBooks(query);
-    }
-  };
+  const keyExtractor = item => item.id;
 
-  keyExtractor = item => item.id;
+  // eslint-disable-next-line react/prop-types
+  const renderItem = ({ item }) => <BookSearchResultsItem item={ item } onPressItem={ onPressItem } />;
 
-  renderItem = ({ item }) => <BookSearchResultsItem item={item} onPressItem={this.onPressItem} />;
+  const data = (results && results.items) || [];
 
-  render() {
-    const { isFetching, results, error, navigation } = this.props;
-
-    const data = (results && results.items) || [];
-
-    if (isFetching) {
-      return <RenderMessage message="Loading..." />;
-    }
-    if (error) {
-      return <RenderError error={error} />;
-    }
-    return (
-      <Container style={{ flex: 1, justifyContent: 'center' }}>
-        <Header>
-          <Left>
-            <Button transparent onPress={() => navigation.goBack()}>
-              <Icon name="md-arrow-back" />
-            </Button>
-          </Left>
-          <Body>
-            <Title>Search results</Title>
-          </Body>
-          <Right />
-        </Header>
-        <Content>
-          <FlatList
-            data={data}
-            keyExtractor={this.keyExtractor}
-            renderItem={this.renderItem}
-            ListEmptyComponent={<Text>No books found...</Text>}
-          />
-        </Content>
-      </Container>
-    );
+  if (isFetching) {
+    return <RenderMessage message="Loading..." />;
   }
+  if (error) {
+    return <RenderError error={ error } />;
+  }
+  return (
+    <Container style={ { flex: 1, justifyContent: 'center' } }>
+      <Header>
+        <Left>
+          <Button transparent onPress={ () => navigation.goBack() }>
+            <Icon name="md-arrow-back" />
+          </Button>
+        </Left>
+        <Body>
+          <Title>Search results</Title>
+        </Body>
+        <Right />
+      </Header>
+      <Content>
+        <FlatList
+          data={ data }
+          keyExtractor={ keyExtractor }
+          renderItem={ renderItem }
+          ListEmptyComponent={ <Text>No books found...</Text> }
+        />
+      </Content>
+    </Container>
+  );
 }
+
+BookSearchResults.navigationOptions = {
+  header: null,
+};
 
 BookSearchResults.propTypes = {
   results: PropTypes.oneOfType([
@@ -107,6 +99,7 @@ BookSearchResults.propTypes = {
     status: PropTypes.number,
     data: PropTypes.string,
   }),
+  fetchBooksAction: PropTypes.func.isRequired,
 };
 
 BookSearchResults.defaultProps = {
@@ -122,7 +115,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchBooks: phrase => dispatch(fetchBooks(phrase)),
+  fetchBooksAction: phrase => dispatch(fetchBooks(phrase)),
 });
 
 export default connect(
