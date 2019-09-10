@@ -37,10 +37,10 @@ class BookSearchResults extends React.Component {
   };
 
   fetchBooks = phrase => {
-    const { navigation, actions } = this.props;
+    const { navigation, fetchBooks } = this.props;
     const query = phrase || navigation.getParam('query', 'NO-ID');
     if (query) {
-      actions.fetchBooks(query);
+      fetchBooks(query);
     }
   };
 
@@ -125,7 +125,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ fetchBooks }, dispatch),
+  fetchBooks: phrase => dispatch(fetchBooks(phrase)),
 });
 
 export default connect(

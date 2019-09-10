@@ -22,8 +22,8 @@ class BookSearchItemDetails extends React.Component {
   }
 
   fetchBookDetails = id => {
-    const { actions } = this.props;
-    actions.fetchBookDetails(id);
+    const { fetchBookDetails } = this.props;
+    fetchBookDetails(id);
   };
 
   render() {
@@ -94,7 +94,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ fetchBookDetails }, dispatch),
+  fetchBookDetails: id => dispatch(fetchBookDetails(id)),
 });
 
 export default connect(
